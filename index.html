@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For You ❤️</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      text-align: center;
+      background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 800% 800%;
+      animation: gradientBG 15s ease infinite;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      transition: background 0.5s ease-in-out;
+    }
+
+    body:hover {
+      filter: brightness(1.1) drop-shadow(0 0 20px #f06292);
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 60px;
+      color: #e91e63;
+      margin-top: 40px;
+      text-shadow: 2px 2px #fff;
+      transition: transform 0.3s;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    h1:hover {
+      animation: bounce 0.6s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    .container {
+      margin-top: 50px;
+      position: relative;
+    }
+
+    label {
+      font-size: 24px;
+      display: block;
+      margin: 15px 0 5px;
+      color: #880e4f;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      padding: 15px;
+      font-size: 20px;
+      border: 2px solid #c2185b;
+      border-radius: 15px;
+      width: 250px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: box-shadow 0.3s, transform 0.3s;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      outline: none;
+      transform: scale(1.05);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+    }
+
+    button {
+      padding: 15px 40px;
+      font-size: 24px;
+      background: #ec407a;
+      border: none;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+    }
+
+    .option-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      flex-wrap: wrap;
+      margin-top: 50px;
+    }
+
+    .option-card {
+      width: 180px;
+      height: 180px;
+      background: #f8bbd0;
+      border: 4px solid #880e4f;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #f06292;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .option-card:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px #ec407a;
+    }
+
+    .option-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .option-card span {
+      font-size: 20px;
+      color: #880e4f;
+    }
+
+    #guy {
+      position: absolute;
+      width: 100px;
+      left: -120px;
+      top: 50px;
+      transition: left 1s ease;
+    }
+
+    #loader {
+      display: none;
+      position: fixed;
+      background: rgba(255, 192, 203, 0.95);
+      top: 0; left: 0; right: 0; bottom: 0;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10;
+    }
+
+    #loader img {
+      width: 150px;
+      animation: kiss 1s infinite alternate;
+    }
+
+    @keyframes kiss {
+      from { transform: scale(1) rotate(0); }
+      to { transform: scale(1.2) rotate(20deg); }
+    }
+
+    .rotating-heart {
+      font-size: 60px;
+      animation: rotate 2s linear infinite;
+      margin-top: 20px;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .cups {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+      perspective: 1000px;
+    }
+
+    .cup {
+      width: 120px;
+      height: 180px;
+      margin: 0 30px;
+      background: #f8bbd0;
+      border: 4px solid #880e4f;
+      border-radius: 20px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      transition: transform 0.6s ease, box-shadow 0.3s;
+      transform-style: preserve-3d;
+    }
+
+    .cup:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+    }
+
+    .envelope {
+      position: absolute;
+      bottom: 10px;
+      left: 35px;
+      width: 50px;
+      display: none;
+    }
+
+    #zoom-envelope {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.8s ease;
+      z-index: 20;
+    }
+
+    #zoom-envelope.show {
+      transform: translate(-50%, -50%) scale(2);
+    }
+
+    #final-message {
+      font-size: 32px;
+      color: #c2185b;
+      margin-top: 30px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome my Love</h1>
+
+  <!-- Login Page -->
+  <div id="login" class="container">
+    <label for="email">Your Username</label>
+    <input type="email" id="email" placeholder="Enter username" required>
+
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter password" required>
+
+    <button onclick="login()">Sign In</button>
+
+    <img src="https://media0.giphy.com/media/vgGUJcDl9ucSv073jp/giphy.gif" alt="Peeking Guy" id="guy">
+  </div>
+
+  <!-- Loader -->
+  <div id="loader">
+    <img src="https://i.pinimg.com/originals/1e/c5/38/1ec5380287a1eb3abd0faa66febeb081.gif" alt="Kissing Guy">
+    <div class="rotating-heart">💖</div>
+  </div>
+
+  <!-- Home Page -->
+  <div id="home" class="container" style="display:none;">
+    <h2>Pick the best option:</h2>
+    <div class="option-buttons">
+      <div class="option-card" onclick="selectOption('music')">
+        <img src="https://cdn.dribbble.com/userupload/29179303/file/original-2536efd374c53c282a258d4080eb7717.jpg?resize=1600x1200&vertical=center" alt="Music">
+        <span>Music</span>
+      </div>
+      <div class="option-card" onclick="selectOption('studies')">
+        <img src="https://media.licdn.com/dms/image/v2/C5112AQFNNeS3s52jDQ/article-cover_image-shrink_600_2000/0/1586245079094?e=2147483647&v=beta&t=YttLS0HOMiCm-XT2MvGEcGWqM2hMNh8qM-RCCYaSPEo" alt="Studies">
+        <span>Studies</span>
+      </div>
+      <div class="option-card" onclick="selectOption('parents')">
+        <img src="https://t3.ftcdn.net/jpg/09/71/12/10/360_F_971121035_YjqpbDQV3oGKIMBLAcft7ULRE0cDkkmh.jpg" alt="Parents">
+        <span>Parents</span>
+      </div>
+      <div class="option-card" onclick="selectOption('shankar')">
+        <img src="https://www.gracetyler.org/wp-content/uploads/2023/09/Love-head-sign.jpeg" alt="Shankar">
+        <span>Shankar</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Page -->
+  <div id="game" class="container" style="display:none;">
+    <h2>Find the hidden envelope 💌</h2>
+    <div class="cups">
+      <div class="cup" id="cup1" onclick="chooseCup(1)">
+        <img src="https://i.pinimg.com/originals/c9/1b/ae/c91baedce19a1294db806c6769232720.gif" class="envelope" id="env1">
+      </div>
+      <div class="cup" id="cup2" onclick="chooseCup(2)">
+        <img src="https://i.pinimg.com/originals/c9/1b/ae/c91baedce19a1294db806c6769232720.gif" class="envelope" id="env2">
+      </div>
+      <div class="cup" id="cup3" onclick="chooseCup(3)">
+        <img src="https://i.pinimg.com/originals/c9/1b/ae/c91baedce19a1294db806c6769232720.gif" class="envelope" id="env3">
+      </div>
+    </div>
+  </div>
+
+  <!-- Zooming Envelope -->
+  <div id="zoom-envelope">
+    <img src="https://i.pinimg.com/originals/c9/1b/ae/c91baedce19a1294db806c6769232720.gif">
+  </div>
+
+  <p id="final-message"></p>
+
+  <script>
+    function login() {
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const password = document.getElementById('password').value.trim();
+      const guy = document.getElementById('guy');
+      if (email === 'shankar' && password === 'shankar') {
+        guy.style.display = 'none';
+        document.getElementById('loader').style.display = 'flex';
+        setTimeout(() => {
+          document.getElementById('loader').style.display = 'none';
+          document.getElementById('login').style.display = 'none';
+          document.getElementById('home').style.display = 'block';
+        }, 4000);
+      } else {
+        guy.style.left = '50px';
+        setTimeout(() => { guy.style.left = '-120px'; }, 2000);
+        alert('Oops! Wrong details! Try again 😜');
+      }
+    }
+
+    function selectOption(option) {
+      if (option !== 'shankar') {
+        alert('Nope! Pick Shankar! ❤️');
+      } else {
+        document.getElementById('home').style.display = 'none';
+        document.getElementById('game').style.display = 'block';
+        let correct = Math.floor(Math.random() * 3) + 1;
+        window.correctCup = correct;
+        setTimeout(shuffleCups, 500);
+      }
+    }
+
+    function shuffleCups() {
+      const cups = [document.getElementById('cup1'), document.getElementById('cup2'), document.getElementById('cup3')];
+      cups.forEach((cup) => {
+        let offset = (Math.random() * 40) - 20; // -20px to +20px
+        cup.style.transform = `translateX(${offset}px) rotateY(360deg)`;
+      });
+
+      // Show the envelope under the correct cup for 3 seconds only
+      setTimeout(() => {
+        const env = document.getElementById('env' + window.correctCup);
+        env.style.display = 'block';
+        setTimeout(() => {
+          env.style.display = 'none';
+        }, 3000);
+      }, 1500);
+    }
+
+    function chooseCup(num) {
+      if (num === window.correctCup) {
+        document.querySelector('.cups').style.display = 'none';
+        const zoom = document.getElementById('zoom-envelope');
+        zoom.style.display = 'block';
+        setTimeout(() => {
+          zoom.classList.add('show');
+        }, 50);
+
+        setTimeout(() => {
+          zoom.classList.remove('show');
+          zoom.style.display = 'none';
+        }, 2000);
+
+        document.getElementById('final-message').innerText =
+          'My love, Suvarna Menon. Everyday I wake up, seeing your face. Feeling you nearby me, sleeping next to me, looking at me saying GOOD MORNING SHANKUU. Everyday I choose you as my girlfriend, my friend, my wife, and everyone — my whole world lies in you, my love. I will always be there with you. I will never leave you. LOVE YOU FOREVER MALUUUUUUUUUUUU ❤️';
+      } else {
+        alert('Try again! 💖');
+      }
+    }
+  </script>
+</body>
+</html>
